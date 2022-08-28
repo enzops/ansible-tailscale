@@ -1,0 +1,6 @@
+---
+- name: Launch tailscale
+  collections:
+    - ansible.bultin
+  shell: |
+    /usr/bin/tailscale up {{ tailscale_up }}

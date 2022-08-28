@@ -1,0 +1,6 @@
+all:
+  hosts: 
+    vagrant:
+      ansible_port: 2222
+      ansible_host: localhost
+      ansible_user: root

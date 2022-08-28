@@ -1,0 +1,17 @@
+---
+tailscale_debian_keyrepository:
+  - url: "https://pkgs.tailscale.com/stable/{{ ansible_distribution|lower }}/{{ ansible_distribution_release }}.noarmor.gpg"
+    state: present
+
+tailscale_debian_repository:
+  - repo: "deb https://pkgs.tailscale.com/stable/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} main"
+    state: present
+    filename: "tailscale"
+
+tailscale_pkg:
+  - pkg: tailscale
+    state: present
+
+tailscale_preauthkey: ""
+
+tailscale_up: ""
