@@ -1,0 +1,11 @@
+---
+- name: Install
+  import_tasks: install_debian.yml
+  tags:
+  - ansible_headscale:install_debian
+  when: ansible_distribution == "Debian" or "Ubuntu"
+
+- name: Run
+  import_tasks: run.yml
+  tags:
+  - ansible_headscale:run

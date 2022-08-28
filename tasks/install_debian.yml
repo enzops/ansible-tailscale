@@ -1,0 +1,34 @@
+---
+- name: Get architecture
+  shell: dpkg --print-architecture
+  register: deb_architecture
+  tags: ansible_headscale:install:get_architecture
+
+- name: Add repository key
+  ansible.builtin.apt_key:
+    url: "{{ item.url }}"
+    state: "{{ item.state }}"
+  when:
+  - tailscale_debian_keyrepository is defined
+  - tailscale_debian_keyrepository | length > 0
+  loop: "{{ tailscale_debian_keyrepository }}"
+
+- name: Add respository
+  ansible.builtin.apt_repository:
+    repo: "{{ item.repo }}"
+    state: "{{ item.state }}"
+    filename: "{{ item.filename }}"
+  when:
+  - tailscale_debian_repository is defined
+  - tailscale_debian_repository | length > 0
+  loop: "{{ tailscale_debian_repository }}"
+
+- name: Install package
+  ansible.builtin.apt:
+    update_cache: yes
+    pkg: "{{ item.pkg }}"
+    state: "{{ item.state }}"
+  when:
+  - tailscale_pkg is defined
+  - tailscale_pkg | length > 0
+  loop: "{{ tailscale_pkg }}"

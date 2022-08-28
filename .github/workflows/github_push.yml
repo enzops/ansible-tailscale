@@ -1,0 +1,16 @@
+name: Github push workflow
+on: push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: ansible-lint
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          path: main
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' 
+      - run: pip install ansible ansible-lint
+      - run: ansible-lint --version
+      - run: ansible-lint .
