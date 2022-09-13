@@ -12,6 +12,8 @@ tailscale_pkg:
   - pkg: tailscale
     state: present
 
+tailscale_exit_node: false
+
 tailscale_preauthkey: ""
 
 tailscale_up: ""
